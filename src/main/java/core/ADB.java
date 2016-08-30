@@ -92,12 +92,46 @@ public class ADB {
         command("adb -s "+ID+" install "+packageID);
     }
 
+    public void clearLogBuffer(String packageID){
+        command("adb -s "+ID+" shell -c");
+    }
 
+    //target: the location to storr the file
+    public void pushFile(String source, String target){
+        command("adb -s "+ID+" push "+source+" "+target);
+    }
 
+    public void pullFile(String source, String target){
+        command("adb -s "+ID+" pull "+source+" "+target);
+    }
 
+    public void deleteFile(String target){
+        command("adb -s "+ID+" shell rm "+target);
+    }
 
+    public void moveFile(String source, String target){
+         command("adb -s "+ID+" shell mv "+source+" "+target);
+    }
 
+    public void takeScreenShot(String target){
+        command("adb -s "+ID+" shell screencap "+target);
+    }
 
+    public void rebootDevice(){
+        command("adb -s "+ID+" reboot");
+    }
+
+    public String getDeviceModel(){
+        return command("adb -s "+ID+" shell getprop ro.product.model");
+    }
+
+    public String getDeviceSerialNumber(){
+        return command("adb -s "+ID+" dhell getprop ro.serailno");
+    }
+
+    public String getDeviceCarrier(){
+        return command("adb -s "+ID+" dhell getprop gsm.operator.alpha");
+    }
 
 
 

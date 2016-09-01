@@ -2,15 +2,13 @@ package core;
 
 //he has api.android.Android and a method scrollTo() but this library does not have it I have to implement it there are some examples online
 //scrollTo() is removed
-import api.android.some.Android;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
+import api.android.Android;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
 /**
- * Created by ceko on 08/28/2016.
+ * I HAVE TO IMPLEMENT SCROLLTO METHOD BECAUSE IT IS DEPRECATED
  */
 public class UiObject {
 
@@ -18,7 +16,7 @@ public class UiObject {
 
     UiObject(String locator){
         this.locator = locator;
-        System.out.println(this.locator);
+        MyLogger.log.debug("Created new UiObject: " +this.locator);
 
     }
 

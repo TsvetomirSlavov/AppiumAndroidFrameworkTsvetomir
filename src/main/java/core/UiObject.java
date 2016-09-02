@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 /**
  * I HAVE TO IMPLEMENT SCROLLTO METHOD BECAUSE IT IS DEPRECATED
+ * Create more methods when needed dependending on the requirements for the app functionality to be validated
  */
 public class UiObject {
 

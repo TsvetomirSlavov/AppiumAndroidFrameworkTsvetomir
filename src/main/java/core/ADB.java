@@ -12,6 +12,7 @@ import java.util.Arrays;
  * utility methods
  * ADD AS MANY AS I NEED LOOK UP ADB COMMANDS
  * ADD LOGS TO EVERY METHOD SO I KNOW WAHT THE PROGRAM IS DOING
+ * Create more methods when needed
  */
 public class ADB {
 
@@ -164,7 +165,7 @@ public class ADB {
         ArrayList pidBefore = getLogcatProcesses();
 
         Thread logcat = new Thread(new Runnable() {
-            @Override
+            //@Override
             public void run() {
                 if(grep == null) {
                     command("adb -s " + ID + " shell logcat -v threadtime > /sdcard/" + logID + ".txt");

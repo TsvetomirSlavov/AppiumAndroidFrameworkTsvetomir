@@ -17,10 +17,13 @@ import core.UiSelector;
 public class Runner {
 
     //start appium manually from cmd appium
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) throws MalformedURLException, InterruptedException {
+
+
+
         //Change Debug Level for the logs
         MyLogger.log.setLevel(Level.INFO);
-        AndroidDriver driver = null;
+        //AndroidDriver driver = null;
         try{
             DriverManager.createDriver();
             Android.adb.openAppsActivity("org.zwanoo.android.speedtest", "com.ookla.speedtest.softfacade.MainActivity");
@@ -36,33 +39,13 @@ public class Runner {
             MyLogger.log.info("Ping: " +ping.getText());
             MyLogger.log.info("Download: " +download.getText());
             MyLogger.log.info("Upload: " +upload.getText());
-
-
+        }
+        finally{
             //So if there is only one device to uninstall the unlock app so if there is an exception, to able to fix it and run again
             DriverManager.killDriver();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally{
-            if(driver != null) driver.quit();
+            //if(driver != null) driver.quit();
         }
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

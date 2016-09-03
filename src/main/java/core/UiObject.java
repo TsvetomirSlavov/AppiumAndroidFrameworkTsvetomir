@@ -245,6 +245,19 @@ public class UiObject {
     //    return this;
     //}
 
+    //Solution from the project AppiumAndroidAPI
+    //public UiObject scrollToText(){
+    //    if(isXpath()) throw new RuntimeException("Cannot scroll to an xPath! Java Client does not support this");
+    //    else if(!uiLocator.contains("")) throw new RuntimeException("UiSelector: "+uiLocator+" does not have a text attribute! Try to use scrollToElement() instead.");
+    //    else {
+    //        String text;
+    //if(uiLocator.contains("textContains")) text = uiLocator.substring(uiLocator.indexOf(".textContains(\""), uiLocator.indexOf("\")")).replace(".textContains(\"","");
+    //        else text = uiLocator.substring(uiLocator.indexOf(".text(\""), uiLocator.indexOf("\")")).replace(".text(\"","");
+    //        Android.driver.scrollToExact(text);
+    //    }
+    //    return this;
+    //}
+
     public UiObject waitToAppear(int seconds){
         Timer timer = new Timer();
         timer.start();

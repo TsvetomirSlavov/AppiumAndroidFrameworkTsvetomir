@@ -1,12 +1,14 @@
 package api.apps.speedtest.home;
 
+import api.android.Android;
+import api.interfaces.Activity;
 import core.MyLogger;
 import org.openqa.selenium.NoSuchElementException;
 
 /**
  * Create more methods
  */
-public class Home {
+public class Home implements Activity {
 
     public HomeUiObjects uiObject = new HomeUiObjects();
 
@@ -41,31 +43,20 @@ public class Home {
         try{
             MyLogger.log.info("Tapping on Test Again Button");
             uiObject.testAgainButton().tap().waitToDisappear(5).waitToAppear(120);
-            return this;
+            return Android.app.speedtest.home;
         }catch (NoSuchElementException e){
             throw new AssertionError("Cant tap Test Again Button, element absent or blocked by a dialog");
         }
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Home waitToLoad() {
+        try{
+            MyLogger.log.info("Waiting for Home activity");
+            uiObject.testAgainButton().waitToAppear(10);
+            return Android.app.speedtest.home;
+        }catch (AssertionError e){
+            throw new AssertionError("Home activity failed to load/open");
+        }
+    }
 }

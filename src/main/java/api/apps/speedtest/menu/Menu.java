@@ -1,6 +1,7 @@
 package api.apps.speedtest.menu;
 
 import api.android.Android;
+import api.apps.speedtest.about.About;
 import api.apps.speedtest.home.Home;
 import api.apps.speedtest.results.Results;
 import core.MyLogger;
@@ -33,6 +34,7 @@ public class Menu {
         }
     }
 
+    //Todo return settings, implement settings API
     public void tapSettings(){
         try{
             MyLogger.log.info("Tapping on the SETTINGS Menu Buton");
@@ -42,10 +44,11 @@ public class Menu {
         }
     }
 
-    public void tapAbout(){
+    public About tapAbout(){
         try{
             MyLogger.log.info("Tapping on the ABOUT Menu Buton");
             uiObject.about().tap();
+            return Android.app.speedtest.about.waitToLoad();
         }catch (NoSuchElementException e){
             throw new AssertionError("Cant tap ABOUT Button, element absent or blocked by a dialog");
         }

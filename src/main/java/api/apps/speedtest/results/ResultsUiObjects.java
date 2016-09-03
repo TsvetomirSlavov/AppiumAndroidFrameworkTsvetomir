@@ -60,7 +60,7 @@ public class ResultsUiObjects {
         return resultsLable;
     }
 
-
+    //Todo implement a method for the number of results, so I can do assertion that there is a new record added after the test
 
     //public UiObject shareButton(){
     //    if(shareButton == null) shareButton = new UiSelector().resourceId(Android.app.speedtest.packageID()+":id/shareButton").makeUiObject();

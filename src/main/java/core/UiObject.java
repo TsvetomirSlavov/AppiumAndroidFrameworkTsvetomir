@@ -233,6 +233,9 @@ public class UiObject {
         return this;
     }
 
+    //USE   By  TikhomirovSergey GitHub  framework Appium updates regularily  java-client/src/test/java/io/appium/java_client/android/AndroidElementTest.java   method  scrollingToSubElement()  oh this is only a test method to test whether his code works
+
+
     //public UiObject scrollTo(){
     //    if(locator.contains("text")) throw new RuntimeException("Scroll to method can only be used with text attributes and current locator: "+locator+" does not contain any text attributes!");
     //    if(isXpath()) Android.driver.scrollTo(locator.substring(locator.indexOf("@text=\""), locator.indexOf("\"]")).replace("@text=\"", ""));

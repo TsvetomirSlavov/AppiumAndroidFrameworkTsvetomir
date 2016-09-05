@@ -56,6 +56,8 @@ public class ADB {
             line = line.trim();
             if (line.endsWith("device")) devices.add(line.replace("device", "").trim());
         }
+        //Add a log to see the connected devices in the terminal
+        MyLogger.log.info("Conncted deviecs list:\n"+devices);
         return devices;
 
     }

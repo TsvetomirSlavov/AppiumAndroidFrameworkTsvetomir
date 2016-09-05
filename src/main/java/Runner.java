@@ -1,4 +1,5 @@
 import api.android.Android;
+import api.apps.speedtest.home.Home;
 import core.ADB;
 import core.MyLogger;
 import core.UiObject;
@@ -15,35 +16,21 @@ import core.UiSelector;
  * Created by ceko on 08/27/2016.
  */
 public class Runner {
-
     //start appium manually from cmd appium
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
-
-
-
         //Change Debug Level for the logs
         MyLogger.log.setLevel(Level.INFO);
-        //AndroidDriver driver = null;
         try{
             DriverManager.createDriver();
-            Android.adb.openAppsActivity("org.zwanoo.android.speedtest", "com.ookla.speedtest.softfacade.MainActivity");
-
-            UiObject testAgainButton = new UiSelector().resourceId("org.zwanoo.android.speedtest:id/o2_button_text").makeUiObject();
-            UiObject ping = new UiSelector().resourceId("org.zwanoo.android.speedtest:id/pingSpeed").makeUiObject();
-            UiObject download = new UiSelector().resourceId("org.zwanoo.android.speedtest:id/downloadSpeed").makeUiObject();
-            UiObject upload = new UiSelector().resourceId("org.zwanoo.android.speedtest:id/uploadSpeed").makeUiObject();
-
-            //VERY IMPORTANT WAITS BECAUSE OTHERWISE IT CAN NOT FIND THE ELEMENTS
-            testAgainButton.waitToAppear(15).tap().waitToDisappear(5).waitToAppear(120);
-
-            MyLogger.log.info("Ping: " +ping.getText());
-            MyLogger.log.info("Download: " +download.getText());
-            MyLogger.log.info("Upload: " +upload.getText());
+            Android.app.speedtest.open();
+            Home results = Android.app.speedtest.home.tapTestAgain();
+            MyLogger.log.info("Ping"+results.getPingSpeed());
+            MyLogger.log.info("Download"+results.getDownloadSpeed());
+            MyLogger.log.info("Upload"+results.getUploadSpeed());
         }
         finally{
             //So if there is only one device to uninstall the unlock app so if there is an exception, to able to fix it and run again
             DriverManager.killDriver();
-            //if(driver != null) driver.quit();
         }
     }
 

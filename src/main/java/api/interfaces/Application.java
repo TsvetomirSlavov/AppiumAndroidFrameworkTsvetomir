@@ -7,7 +7,7 @@ public interface Application {
 
     void forceStop();
     void clearData();
-    Object opecn();
+    Object open();
     String packageID();
     String activityID();
 

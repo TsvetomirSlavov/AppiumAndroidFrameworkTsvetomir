@@ -35,8 +35,16 @@ public class DriverManager {
             //Diamond notation i not supported at this language level!!!! I had to put data tipes in the declaration, not leave it empty to fix this error
             hosts = new HashMap<String, URL>();
             //Add more test devices here, for sequential running, use the same server IP and Port
-            hosts.put("0715f7c98061163a", new URL("http://0.0.0.0:4723/wd/hub"));
-            //For parallel running change the IP and Port number of the server for each device
+            //WiFi connection: the computer and the phones must be connected to the same rooter over WiFi to work
+            //USB way to connect  S6   0715f7c98061163a      WiFi way to connect 192.168.0.7:5555
+            //                    S4   d9e1470c
+            //                    ZTE  99000322039588
+            //cmd appium 0.0.0.0:4723     Appium.exe 127.0.0.1:4723   USE Appium.exe to be able to connect multiple devices over WiFi
+            hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4723/wd/hub"));
+            //hosts.put("192.168.0.6:5555", new URL("http://127.0.0.1:4724/wd/hub"));
+            //hosts.put("99000322039588", new URL("http://127.0.0.1:4724/wd/hub"));
+            //hosts.put("d9e1470c", new URL("http://0.0.0.0:4723/wd/hub"));
+            //For parallel running change the IP and Port number of the server for each device +1
             //hosts.put("otherDevice", new URL("http://0.0.0.1:4724/wd/hub"));
         }
         return hosts.get(deviceID);

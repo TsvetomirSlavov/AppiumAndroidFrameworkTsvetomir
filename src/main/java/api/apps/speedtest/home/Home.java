@@ -42,7 +42,8 @@ public class Home implements Activity {
     public Home tapTestAgain(){
         try{
             MyLogger.log.info("Tapping on Test Again Button");
-            uiObject.testAgainButton().tap().waitToDisappear(5).waitToAppear(120);
+            //Increase to 15 seconds because sometimes it takes longer and it throws Exception just because we did set it for shorter time period!
+            uiObject.testAgainButton().tap().waitToDisappear(15).waitToAppear(120);
             return Android.app.speedtest.home;
         }catch (NoSuchElementException e){
             throw new AssertionError("Cant tap Test Again Button, element absent or blocked by a dialog");

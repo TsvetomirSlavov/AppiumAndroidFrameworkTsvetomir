@@ -1,7 +1,24 @@
 package core.managers;
 
 /**
- * Created by ceko on 08/28/2016.
+ * Set JUnit rules what happens when test fails or passes
  */
 public class TestManager {
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

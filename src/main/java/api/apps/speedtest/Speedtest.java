@@ -28,7 +28,7 @@ public class Speedtest implements Application {
         Android.adb.clearAppsData(packageID());
     }
 
-    public Object opecn() {
+    public Object open() {
         Android.adb.openAppsActivity(packageID(), activityID());
         return null;
     }

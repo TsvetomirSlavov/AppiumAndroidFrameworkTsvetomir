@@ -6,11 +6,13 @@ import core.UiObject;
 import core.managers.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Level;
+import org.junit.runner.JUnitCore;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import core.UiSelector;
+import tests.TestPrimer;
 
 /**
  * Created by ceko on 08/27/2016.
@@ -22,11 +24,7 @@ public class Runner {
         MyLogger.log.setLevel(Level.INFO);
         try{
             DriverManager.createDriver();
-            Android.app.speedtest.open();
-            Home results = Android.app.speedtest.home.tapTestAgain();
-            MyLogger.log.info("Ping"+results.getPingSpeed());
-            MyLogger.log.info("Download"+results.getDownloadSpeed());
-            MyLogger.log.info("Upload"+results.getUploadSpeed());
+            JUnitCore.runClasses(TestPrimer.class);
         }
         finally{
             //So if there is only one device to uninstall the unlock app so if there is an exception, to able to fix it and run again

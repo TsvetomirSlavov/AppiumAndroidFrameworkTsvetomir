@@ -14,8 +14,8 @@ public class Functionality extends TestManager {
     private static Speedtest speedtest = Android.app.speedtest;
 
     @Test
-    public void test4(){
-        testInfo.id("test4").suite("Functionality").name("Verify that you can test again");
+    public void test4TestAgainFunctionality(){
+        testInfo.id("test4TestAgainFunctionality").suite("Functionality").name("Verify that you can test again");
         speedtest.menu.tapSpeedtest();
         speedtest.home.tapTestAgain();
         Assert.assertTrue(speedtest.home.uiObject.ping().exists());

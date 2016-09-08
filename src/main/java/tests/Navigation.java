@@ -25,6 +25,7 @@ public class Navigation extends TestManager {
     public void test1Home(){
         //set expected results
         testInfo.id("test1Home").name("Verify that Home Activity has all the elements");
+        speedtest.menu.tapSpeedtest();
         Assert.assertTrue(speedtest.home.uiObject.ping().exists());
         Assert.assertTrue(speedtest.home.uiObject.pingSpeed().exists());
         Assert.assertTrue(speedtest.home.uiObject.download().exists());
@@ -54,6 +55,7 @@ public class Navigation extends TestManager {
     @Test
     public void test3About(){
         testInfo.id("test3About").name("Verify that About activity has Privacy Policy and Terms of Use links");
+        speedtest.menu.tapAbout();
         Assert.assertTrue(speedtest.about.uiObject.privacyPolicy().exists());
         Assert.assertTrue(speedtest.about.uiObject.termsOfUse().exists());
     }

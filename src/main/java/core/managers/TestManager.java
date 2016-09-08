@@ -1,6 +1,7 @@
 package core.managers;
 
 import api.android.Android;
+import core.MyLogger;
 import core.Retry;
 import core.TestInfo;
 import org.junit.Before;
@@ -29,15 +30,19 @@ public class TestManager {
         //Handle tests that fail. For example take screenshots and logs and report to the database
         @Override
         public void failed(Throwable t, Description description){
+            MyLogger.log.info("Test Failed");
+            TestInfo.printResults();
             //mockup
-            Android.adb.takeScreenShot("target1");
+            //todo implement screenshots and logs to the database
+            //Android.adb.takeScreenShot("target1");
             //send to a database, integrate with a database the framework
         }
 
         //Handle tests that pass. For example add a record to a database of successful tests.
         @Override
         public void succeeded (Description description){
-
+            MyLogger.log.info("Test Passed");
+            TestInfo.printResults();
         }
     };
 

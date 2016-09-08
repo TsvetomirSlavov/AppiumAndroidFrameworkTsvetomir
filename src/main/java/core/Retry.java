@@ -7,6 +7,7 @@ import org.junit.runners.model.Statement;
 /**
  * Keep retrying a test before failing it a number of times
  *
+ * dependency
  *  // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
  compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
  */

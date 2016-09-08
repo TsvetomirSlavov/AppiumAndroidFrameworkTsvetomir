@@ -36,10 +36,13 @@ public class TestInfo {
         return this;
     }
 
+    //set the id
     public TestInfo id(String value){
         ID = value;
         return this;
     }
+
+    //set the name
     public TestInfo name(String value){
         NAME = value;
         return this;

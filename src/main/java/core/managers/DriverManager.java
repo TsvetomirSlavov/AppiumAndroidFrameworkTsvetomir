@@ -3,6 +3,7 @@ package core.managers;
 import api.android.Android;
 import core.ADB;
 import core.MyLogger;
+import core.constants.Arg;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,7 +22,7 @@ public class DriverManager {
 
     //edit the environment variables first to include APPIUM_HOME path
     private static String nodeJS = System.getenv("APPIUM_HOME")+"/node.exe";
-    private static String appiumJS = System.getenv("APPIUM_HOME")+"/node_modules/appium/bin/appiumjs.exe";
+    private static String appiumJS = System.getenv("APPIUM_HOME")+"/node_modules/appium/bin/appium.js";
     private static DriverService service;
     private static String deviceID;
 
@@ -89,6 +90,8 @@ public class DriverManager {
                 .withAppiumJS(new File(appiumJS))
                 .withIPAddress(host(deviceID).toString().split(":")[1].replace("//",""))
                 .usingPort(Integer.parseInt(host(deviceID).toString().split(":")[2].replace("/wd/hub","")))
+                .withArgument(Arg.TIMEOUT, "120")// shut down appium service if no calls are send after 2 minutes, by default is 1 min
+                .withArgument(Arg.LOG_LEVEL, "warn")//comment out for info log level of appium service
                 .build();
         return service;
     }
@@ -100,6 +103,7 @@ public class DriverManager {
                 deviceID = device;
                 MyLogger.log.info("Trying to create a new Driver for device " + device);
                 createService().start();
+                MyLogger.log.info("Starting Appium service");
                 Android.driver = new AndroidDriver(host(device), getCaps(device));
                 Android.adb = new ADB(device);
                 break;
@@ -118,9 +122,10 @@ public class DriverManager {
             MyLogger.log.info("Uninstalling UNLOCK_APK-DEBUG.APK");
             //UNINSTALL EVERY TIME BECAUSE IT RUNS CHECKS IN THE BEGINNING AND THEY WILL FAIL OTHERWISE
             Android.adb.uninstallApp(unlockPackage);
-            MyLogger.log.info("quitting");
+            MyLogger.log.info("Quitting Android driver");
             Android.driver.quit();
             service.stop();
+            MyLogger.log.info("Stopping Appium service");
         }
         else{
             MyLogger.log.info("Android Driver is not initialized, nothing to kill!");

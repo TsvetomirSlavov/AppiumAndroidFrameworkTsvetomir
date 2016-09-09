@@ -4,6 +4,7 @@ import api.android.Android;
 import api.apps.speedtest.Speedtest;
 import core.managers.TestManager;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,8 +18,12 @@ public class Navigation extends TestManager {
 
     @BeforeClass
     public static void beforeClass(){
-        testInfo.suite("Navigation");
         speedtest.open();
+    }
+
+    @Before
+    public void before(){
+        testInfo.suite("Navigation");
     }
 
     @Test

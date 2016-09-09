@@ -30,7 +30,9 @@ public class TestManager {
         //Handle tests that fail. For example take screenshots and logs and report to the database
         @Override
         public void failed(Throwable t, Description description){
-            MyLogger.log.info("Test Failed");
+            MyLogger.log.info("|----------------------------------|");
+            MyLogger.log.info("|   !!!     TEST FAILED     !!!    |");
+            MyLogger.log.info("|----------------------------------|");
             TestInfo.printResults();
             //mockup
             //todo implement screenshots and logs to the database
@@ -41,7 +43,9 @@ public class TestManager {
         //Handle tests that pass. For example add a record to a database of successful tests.
         @Override
         public void succeeded (Description description){
-            MyLogger.log.info("Test Passed");
+            MyLogger.log.info("|----------------------------------------|");
+            MyLogger.log.info("|              TEST PASSED               |");
+            MyLogger.log.info("|----------------------------------------|");
             TestInfo.printResults();
         }
     };

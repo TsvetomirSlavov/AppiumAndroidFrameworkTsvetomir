@@ -1,9 +1,20 @@
 group 'demo'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'java'
+// In order for my framework to be compatible with different java versions on different machines we use version 1.5 here, but we can use higher if we want to
+sourceCompatibility = 1.8
 
-sourceCompatibility = 1.5
+task buildJar(type: Jar){
+    manifest{
+        attributes 'Implementation-Title': 'Appium Framework',
+                   'Implementation-Version': version,
+                   'Main-Class': 'Runner'
+    }
+    baseName = project.name + "-FM"
+    from {configurations.compile.collect {it.isDirectory() ? it:zipTree(it)}}
+    with jar
+}
 
 repositories {
     mavenCentral()
@@ -13,6 +24,14 @@ dependencies {
 
     compile 'io.appium:java-client:4.1.2'
     compile 'junit:junit:4.12'
+    // https://mvnrepository.com/artifact/log4j/log4j
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    //compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.0.0-beta2'
+
 
 
 }

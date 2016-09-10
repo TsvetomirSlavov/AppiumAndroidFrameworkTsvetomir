@@ -2,15 +2,14 @@ package core;
 
 //he has api.android.Android and a method scrollTo() but this library does not have it I have to implement it there are some examples online
 //scrollTo() is removed
-import api.android.some.Android;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
+import api.android.Android;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
 /**
- * Created by ceko on 08/28/2016.
+ * I HAVE TO IMPLEMENT SCROLLTO METHOD BECAUSE IT IS DEPRECATED
+ * Create more methods when needed dependending on the requirements for the app functionality to be validated
  */
 public class UiObject {
 
@@ -18,7 +17,7 @@ public class UiObject {
 
     UiObject(String locator){
         this.locator = locator;
-        System.out.println(this.locator);
+        MyLogger.log.debug("Created new UiObject: " +this.locator);
 
     }
 
@@ -234,6 +233,9 @@ public class UiObject {
         return this;
     }
 
+    //USE   By  TikhomirovSergey GitHub  framework Appium updates regularily  java-client/src/test/java/io/appium/java_client/android/AndroidElementTest.java   method  scrollingToSubElement()  oh this is only a test method to test whether his code works
+
+
     //public UiObject scrollTo(){
     //    if(locator.contains("text")) throw new RuntimeException("Scroll to method can only be used with text attributes and current locator: "+locator+" does not contain any text attributes!");
     //    if(isXpath()) Android.driver.scrollTo(locator.substring(locator.indexOf("@text=\""), locator.indexOf("\"]")).replace("@text=\"", ""));
@@ -242,6 +244,19 @@ public class UiObject {
     //        if(locator.contains("textContains")) text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"", "");
     //        else text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"", "");
     //        Android.driver.scrollTo(text);
+    //    }
+    //    return this;
+    //}
+
+    //Solution from the project AppiumAndroidAPI
+    //public UiObject scrollToText(){
+    //    if(isXpath()) throw new RuntimeException("Cannot scroll to an xPath! Java Client does not support this");
+    //    else if(!uiLocator.contains("")) throw new RuntimeException("UiSelector: "+uiLocator+" does not have a text attribute! Try to use scrollToElement() instead.");
+    //    else {
+    //        String text;
+    //if(uiLocator.contains("textContains")) text = uiLocator.substring(uiLocator.indexOf(".textContains(\""), uiLocator.indexOf("\")")).replace(".textContains(\"","");
+    //        else text = uiLocator.substring(uiLocator.indexOf(".text(\""), uiLocator.indexOf("\")")).replace(".text(\"","");
+    //        Android.driver.scrollToExact(text);
     //    }
     //    return this;
     //}

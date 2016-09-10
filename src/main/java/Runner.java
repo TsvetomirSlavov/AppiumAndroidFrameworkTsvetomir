@@ -24,7 +24,7 @@ public class Runner {
         MyLogger.log.setLevel(Level.INFO);
         try{
             DriverManager.createDriver();
-            //JUnitCore.runClasses(TestPrimer.class);
+            JUnitCore.runClasses(TestPrimer.class);
         }
         finally{
             //So if there is only one device to uninstall the unlock app so if there is an exception, to able to fix it and run again

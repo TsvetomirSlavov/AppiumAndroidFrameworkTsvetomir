@@ -42,7 +42,8 @@ public class DriverManager {
 
     private static URL host(String deviceID) throws MalformedURLException {
         if(hosts == null){
-            //Diamond notation i not supported at this language level!!!! I had to put data tipes in the declaration, not leave it empty to fix this error
+            //Diamond notation is not supported at this language level 1.5 in build.gradle!!!! I had to put data tipes in the declaration, not leave it empty to fix this error
+            //In order for my framework to be compatible with different java versions on different machines we use version 1.5 here, but we can use higher
             hosts = new HashMap<String, URL>();
             //Add more test devices here, for sequential running, use the same server IP and Port
             //WiFi connection: the computer and the phones must be connected to the same rooter over WiFi to work
@@ -120,7 +121,7 @@ public class DriverManager {
         if(Android.driver != null){
             MyLogger.log.info("Killing Android Driver");
             MyLogger.log.info("Uninstalling UNLOCK_APK-DEBUG.APK");
-            //UNINSTALL EVERY TIME BECAUSE IT RUNS CHECKS IN THE BEGINNING AND THEY WILL FAIL OTHERWISE
+            //UNINSTALL EVERY TIME BECAUSE IT RUNS CHECKS IN THE BEGINNING AND THEY WILL FAIL OTHERWISE OR ADJUST THESE CHECKS
             Android.adb.uninstallApp(unlockPackage);
             MyLogger.log.info("Quitting Android driver");
             Android.driver.quit();
@@ -131,17 +132,6 @@ public class DriverManager {
             MyLogger.log.info("Android Driver is not initialized, nothing to kill!");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

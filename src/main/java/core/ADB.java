@@ -1,7 +1,7 @@
 package core;
 
 import core.managers.ServerManager;
-import org.junit.Test;
+//import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -163,7 +163,7 @@ public class ADB {
     }
 
     //ability to filter the log grep
-    public Object startLogcat( final String logID, final String grep) {
+    public Object startLogcat(final String logID, final String grep) {
         ArrayList pidBefore = getLogcatProcesses();
 
         Thread logcat = new Thread(new Runnable() {
@@ -198,6 +198,8 @@ public class ADB {
         command("adb -s "+ID+" shell kill "+PID);
     }
 
+
+    /*
     @Test
     public void test(){
         ID = "0715f7c98061163a";
@@ -208,7 +210,7 @@ public class ADB {
         stopLogcat(PID);
         System.out.println("Processes after stopping new logcat: "+getLogcatProcesses());
     }
-
+    */
 
 
 

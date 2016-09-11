@@ -59,10 +59,11 @@ public class DriverManager {
             //                    ZTE  99000322039588
             //cmd appium 0.0.0.0:4723     Appium.exe 127.0.0.1:4723   USE Appium.exe to be able to connect multiple devices over WiFi
             //hosts.put("0715f7c98061163a", new URL("http://127.0.0.1:4723/wd/hub"));
-            hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4723/wd/hub"));
+            hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
+            hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("192.168.0.6:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("99000322039588", new URL("http://127.0.0.1:4724/wd/hub"));
-            hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
+
             //For parallel running change the IP and Port number of the server for each device +1
             //hosts.put("otherDevice", new URL("http://0.0.0.1:4724/wd/hub"));
         }
@@ -146,6 +147,101 @@ public class DriverManager {
         }
     }
 
+
+    private static void queueUp() {
+        try {
+            MyLogger.log.info("Queueing Up: "+deviceID);
+            JSONObject json = new JSONObject();
+            json.put("queued_at", Timer.getTimeStamp());
+            JSONObject jsonQueue = Resources.getQueue();
+            jsonQueue.put(deviceID, json);
+            MyLogger.log.info("JSON Queue: "+jsonQueue);
+            ServerManager.write(new File(Resources.QUEUE), jsonQueue.toString());
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static boolean useDevice(String deviceID) {
+        try {
+            JSONObject  json = Resources.getQueue();
+            if(json.containsKey(deviceID)){
+                JSONObject deviceJson = (JSONObject) json.get(deviceID);
+                long time = (long) deviceJson.get("queued_at");
+                int diff = Timer.getDifference(time, Timer.getTimeStamp());
+                if(diff >= 30) return true;
+                else return false;
+            } else return true;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void gracePeriod(){
+        int waitTime = 0;
+        try {
+            JSONObject  json = Resources.getQueue();
+            Set keys = json.keySet();
+
+            JSONObject ourDeviceJson = (JSONObject) json.get(deviceID);
+            json.remove(deviceID);
+            long weQueuedAt = (long) ourDeviceJson.get("queued_at");
+
+            for(Object key : keys){
+                JSONObject deviceJson = (JSONObject) json.get(key);
+                long theyQueuedAt = (long) deviceJson.get("queued_at");
+                //If we did not queue first we need to wait for the other device to initialize driver so there is no collision
+                if(weQueuedAt > theyQueuedAt) {
+                    //But only if device queued first and recently, otherwise we can assume device was already initialized or no longer being used
+                    int diff = Timer.getDifference(theyQueuedAt, Timer.getTimeStamp());
+                    if(diff < 50){
+                        MyLogger.log.info("Device: "+key+" queued first, I will need to give it extra time to initialize");
+                        waitTime += 15;
+                    }
+                }
+            }
+            try {Thread.sleep(waitTime);} catch (InterruptedException e) {e.printStackTrace();}
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void leaveQueue(){
+        try {
+            JSONObject jsonQueue = Resources.getQueue();
+            jsonQueue.remove(deviceID);
+            ServerManager.write(new File(Resources.QUEUE), jsonQueue.toString());
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     private static void queueUp(){
         try{
             MyLogger.log.info("Queueing Up: "+deviceID);
@@ -219,7 +315,7 @@ public class DriverManager {
         }
     }
 
-
+*/
 
 
 

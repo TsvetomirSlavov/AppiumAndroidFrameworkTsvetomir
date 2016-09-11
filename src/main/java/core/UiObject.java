@@ -233,20 +233,25 @@ public class UiObject {
         return this;
     }
 
+
+    //todo implement native appium methods through WebElement that can call all appium methods without this wrapper
+
+
     //USE   By  TikhomirovSergey GitHub  framework Appium updates regularily  java-client/src/test/java/io/appium/java_client/android/AndroidElementTest.java   method  scrollingToSubElement()  oh this is only a test method to test whether his code works
 
-
-    //public UiObject scrollTo(){
-    //    if(locator.contains("text")) throw new RuntimeException("Scroll to method can only be used with text attributes and current locator: "+locator+" does not contain any text attributes!");
-    //    if(isXpath()) Android.driver.scrollTo(locator.substring(locator.indexOf("@text=\""), locator.indexOf("\"]")).replace("@text=\"", ""));
-    //    else{
-    //        String text;
-    //        if(locator.contains("textContains")) text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"", "");
-    //        else text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"", "");
-    //        Android.driver.scrollTo(text);
-    //    }
-    //    return this;
-    //}
+    //FIX scrollTo()
+    //Use older version of appium in gradle 3.4.0 has scrollTo()
+    public UiObject scrollTo(){
+        if(locator.contains("text")) throw new RuntimeException("Scroll to method can only be used with text attributes and current locator: "+locator+" does not contain any text attributes!");
+        if(isXpath()) Android.driver.scrollTo(locator.substring(locator.indexOf("@text=\""), locator.indexOf("\"]")).replace("@text=\"", ""));
+        else{
+            String text;
+            if(locator.contains("textContains")) text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"", "");
+            else text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"", "");
+            Android.driver.scrollTo(text);
+        }
+        return this;
+    }
 
     //Solution from the project AppiumAndroidAPI
     //public UiObject scrollToText(){
@@ -276,11 +281,6 @@ public class UiObject {
         if(timer.expired(seconds) && exists()) throw new AssertionError("Element "+locator+" failed to disappear within "+seconds+" seconds");
         return this;
     }
-
-
-
-
-
 
 
 

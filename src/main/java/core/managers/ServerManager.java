@@ -1,6 +1,6 @@
 package core.managers;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -46,7 +46,38 @@ public class ServerManager {
         return output;
     }
 
+    //return the working dir and append to it as needed
+    public static String getWorkingDir(){
+        return System.getProperty("user.dir");
+    }
 
+    /*
+    @param file The path to the file
+     */
+    public static String read(File file){
+        StringBuilder output = new StringBuilder();
+        try{
+            String line;
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while((line = bufferedReader.readLine()) != null) output.append(line+"\n");
+            bufferedReader.close();
+        }catch (IOException error){
+            error.printStackTrace();
+        }
+        return output.toString();
+    }
 
+    /*
+    @param file The path to the file
+     */
+    public static void write(File file, String content){
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"))){
+            writer.write(content);
+            writer.close();
+        }catch (IOException error){
+            error.printStackTrace();
+        }
+    }
 
 }

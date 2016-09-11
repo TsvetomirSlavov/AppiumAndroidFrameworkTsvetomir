@@ -23,7 +23,9 @@ public class Timer {
         return difference > seconds;
     }
 
-
+    public static int getDifference(long start, long end){
+        return (int) ((end -start)/1000);
+    }
 
 
 }

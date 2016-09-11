@@ -69,7 +69,7 @@ public class ServerManager {
     }
 
     /*
-    @param file The path to the file
+     *@param file The path to the file
      */
     public static void write(File file, String content){
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"))){

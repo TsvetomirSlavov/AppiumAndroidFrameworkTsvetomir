@@ -40,12 +40,13 @@ public class DriverManager {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("deviceName", deviceID);
         caps.setCapability("platformName", "Android");
-        MyLogger.log.info("Installing UNLOCK_APK-DEBUG.APK");
+        MyLogger.log.info("Installing UNLOCK_APK-DEBUG.APK for device "+deviceID);
         //Local path to the appium unlock app
         caps.setCapability("app", "C:\\Program Files (x86)\\Appium\\node_modules\\appium\\build\\unlock_apk\\unlock_apk-debug.apk");
         return caps;
     }
 
+    //either return
     private static URL host(String deviceID) throws MalformedURLException {
         if(hosts == null){
             //Diamond notation is not supported at this language level 1.5 in build.gradle!!!! I had to put data tipes in the declaration, not leave it empty to fix this error
@@ -58,13 +59,12 @@ public class DriverManager {
             //                    S4   d9e1470c
             //                    ZTE  99000322039588
             //cmd appium 0.0.0.0:4723     Appium.exe 127.0.0.1:4723   USE Appium.exe to be able to connect multiple devices over WiFi
-            //hosts.put("0715f7c98061163a", new URL("http://127.0.0.1:4723/wd/hub"));
             hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
-            hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));
+            //hosts.put("0715f7c98061163a", new URL("http://127.0.0.2:4723/wd/hub"));
+            //hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("192.168.0.6:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("99000322039588", new URL("http://127.0.0.1:4724/wd/hub"));
-
-            //For parallel running change the IP and Port number of the server for each device +1
+            //For parallel running change the IP and Port number of the server for each device +1 127.0.0.n+1:4723
             //hosts.put("otherDevice", new URL("http://0.0.0.1:4724/wd/hub"));
         }
         return hosts.get(deviceID);
@@ -114,13 +114,17 @@ public class DriverManager {
                 if(useDevice(deviceID)) {
                     queueUp();
                     gracePeriod();
-                    MyLogger.log.info("Trying to create a new Driver for device " + device);
+                    MyLogger.log.info("Starting Appium service for device "+deviceID+" on port "+host(device).toString());
                     createService().start();
-                    MyLogger.log.info("Starting Appium service");
+                    MyLogger.log.info("Trying to create a new Driver for device " + device);
                     Android.driver = new AndroidDriver(host(device), getCaps(device));
+                    MyLogger.log.info("Trying to create a new ADB for device " + device);
                     Android.adb = new ADB(device);
+                    MyLogger.log.info("Leaving queue "+deviceID);
                     leaveQueue();
-                    break;
+                    //this break stops the loop from executing again break vs continue, but there is no point of continue because there are no more statements
+                    //without it it works correctly one after the other, but there is an issue that the appium server is already in use
+                    //break;
                 }
             }
             catch (Exception e){
@@ -196,7 +200,7 @@ public class DriverManager {
                     int diff = Timer.getDifference(theyQueuedAt, Timer.getTimeStamp());
                     if(diff < 50){
                         MyLogger.log.info("Device: "+key+" queued first, I will need to give it extra time to initialize");
-                        waitTime += 15;
+                        waitTime += 30;
                     }
                 }
             }

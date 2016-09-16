@@ -124,7 +124,8 @@ public class DriverManager {
                     leaveQueue();
                     //this break stops the loop from executing again break vs continue, but there is no point of continue because there are no more statements
                     //without it it works correctly one after the other, but there is an issue that the appium server is already in use
-                    //break;
+                    break;
+                    //I am not sure about the break, it is logical if this method gets called multiple times for 3 devices i do not know
                 }
             }
             catch (Exception e){

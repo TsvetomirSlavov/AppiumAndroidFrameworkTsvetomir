@@ -5,7 +5,7 @@ apply plugin: 'java'
 // In order for my framework to be compatible with different java versions on different machines we use version 1.5 here, but we can use higher if we want to
 sourceCompatibility = 1.8
 
-task buil dJar(type: Jar){
+task build Jar(type: Jar){
     manifest{
         attributes 'Implementation-Title': 'Appium Framework',
                    'Implementation-Version': version,

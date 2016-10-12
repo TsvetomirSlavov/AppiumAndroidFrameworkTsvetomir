@@ -63,7 +63,7 @@ public class DriverManager {
             //                    ZTE  99000322039588
             //cli appium 0.0.0.0:4723     Appium.exe 127.0.0.1:4723   USE Appium.exe to be able to connect multiple devices over WiFi
             hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
-            hosts.put("0715f7c98061163a", new URL("http://127.0.0.3:4724/wd/hub"));
+            hosts.put("0715f7c98061163a", new URL("http://127.0.0.7:4724/wd/hub"));
             //hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("192.168.0.6:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("99000322039588", new URL("http://127.0.0.1:4724/wd/hub"));

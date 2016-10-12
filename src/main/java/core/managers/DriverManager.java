@@ -40,8 +40,8 @@ public class DriverManager {
     private static DesiredCapabilities getCaps(String deviceID){
         MyLogger.log.info("Creating driver capabilities for device: "+deviceID);
         DesiredCapabilities caps = new DesiredCapabilities();
-        //FIX change "deviceName" to  MobileCapabilityType.UDID  so it does not try to run the same device always
-        caps.setCapability(MobileCapabilityType.UDID, deviceID);
+        //FIX change "deviceName" to  MobileCapabilityType.UDID insted of deviceID so it does not try to run the same device always
+        caps.setCapability("deviceName", MobileCapabilityType.UDID);
         caps.setCapability("platformName", "Android");
         MyLogger.log.info("Installing UNLOCK_APK-DEBUG.APK for device "+deviceID);
         //Local path to the appium unlock app

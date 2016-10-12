@@ -63,7 +63,7 @@ public class DriverManager {
             //                    ZTE  99000322039588
             //cmd appium 0.0.0.0:4723     Appium.exe 127.0.0.1:4723   USE Appium.exe to be able to connect multiple devices over WiFi
             hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
-            //hosts.put("0715f7c98061163a", new URL("http://127.0.0.2:4723/wd/hub"));
+            hosts.put("0715f7c98061163a", new URL("http://127.0.0.2:4723/wd/hub"));
             //hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("192.168.0.6:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("99000322039588", new URL("http://127.0.0.1:4724/wd/hub"));
@@ -127,7 +127,8 @@ public class DriverManager {
                     leaveQueue();
                     //this break stops the loop from executing again break vs continue, but there is no point of continue because there are no more statements
                     //without it it works correctly one after the other, but there is an issue that the appium server is already in use
-                    break;
+                    //Without the break it starts successfully 2 appium servers 1:4723 2:4723 but still it gets confused somewhere
+                    //break;
                     //I am not sure about the break, it is logical if this method gets called multiple times for 3 devices i do not know
                 }
             }

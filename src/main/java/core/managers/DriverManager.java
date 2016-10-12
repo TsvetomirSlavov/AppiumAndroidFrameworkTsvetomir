@@ -7,6 +7,8 @@ import core.Timer;
 import core.constants.Arg;
 import core.constants.Resources;
 import io.appium.java_client.android.AndroidDriver;
+//ADD TO FIX THE ISSUE WITH THE SAME DEVICES RUNNING THE TESTS
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -38,7 +40,8 @@ public class DriverManager {
     private static DesiredCapabilities getCaps(String deviceID){
         MyLogger.log.info("Creating driver capabilities for device: "+deviceID);
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", deviceID);
+        //FIX change "deviceName" to  MobileCapabilityType.UDID  so it does not try to run the same device always
+        caps.setCapability(MobileCapabilityType.UDID, deviceID);
         caps.setCapability("platformName", "Android");
         MyLogger.log.info("Installing UNLOCK_APK-DEBUG.APK for device "+deviceID);
         //Local path to the appium unlock app

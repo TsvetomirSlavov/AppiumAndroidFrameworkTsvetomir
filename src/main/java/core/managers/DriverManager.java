@@ -73,7 +73,8 @@ public class DriverManager {
             //5 node.exe node_modules\appium\bin\appium.js --nodeconfig "C:\Users\ceko\IdeaProjects\demo\src\main\resources\appium_node_S4.json" -p 4723 -U d9e1470c
             //6 node.exe node_modules\appium\bin\appium.js --nodeconfig "C:\Users\ceko\IdeaProjects\demo\src\main\resources\appium_node_S6.json" -p 4724 -U 0715f7c98061163a
             hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
-            hosts.put("0715f7c98061163a", new URL("http://127.0.0.1:4724/wd/hub"));
+            //issues with port 4724
+            hosts.put("0715f7c98061163a", new URL("http://127.0.0.1:4725/wd/hub"));
 
 
             //hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));

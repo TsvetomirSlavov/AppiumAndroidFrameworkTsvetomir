@@ -34,11 +34,11 @@ public class Famy implements Application{
     }
 
     public String packageID() {
-        return "org.zwanoo.android.speedtest";
+        return "com.spacosa.android.famy.global";
     }
 
     public String activityID() {
-        return "com.ookla.speedtest.softfacade.MainActivity";
+        return "com.spacosa.android.famy.global.MainActivity";
     }
 
 }

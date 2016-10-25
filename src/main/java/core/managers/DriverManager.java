@@ -62,8 +62,20 @@ public class DriverManager {
             //                    S4   d9e1470c
             //                    ZTE  99000322039588
             //cli appium 0.0.0.0:4723     Appium.exe 127.0.0.1:4723   USE Appium.exe to be able to connect multiple devices over WiFi
+
+            // ****   HOW TO RUN PARALLEL GRID  ****
+            //Browser http://192.168.56.1:4444/grid/console#
+            //1 Create json config files for each device
+            //2 Open 3 cli
+            //3 java -jar selenium-server-standalone-3.0.0-beta4.jar -role hub
+            //NO Appium server must be started for each device and then we execute the commands to register it with the selenium server standalone
+            //4 open new cli and navigate to the appium folder for each device new cli, arguments in quotaion marks
+            //5 node.exe node_modules\appium\bin\appium.js --nodeconfig "C:\Users\ceko\IdeaProjects\demo\src\main\resources\appium_node_S4.json" -p 4723 -U d9e1470c
+            //6 node.exe node_modules\appium\bin\appium.js --nodeconfig "C:\Users\ceko\IdeaProjects\demo\src\main\resources\appium_node_S6.json" -p 4724 -U 0715f7c98061163a
             hosts.put("d9e1470c", new URL("http://127.0.0.1:4723/wd/hub"));
-            hosts.put("0715f7c98061163a", new URL("http://127.0.0.7:4724/wd/hub"));
+            hosts.put("0715f7c98061163a", new URL("http://127.0.0.1:4724/wd/hub"));
+
+
             //hosts.put("192.168.0.7:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("192.168.0.6:5555", new URL("http://127.0.0.1:4724/wd/hub"));
             //hosts.put("99000322039588", new URL("http://127.0.0.1:4724/wd/hub"));

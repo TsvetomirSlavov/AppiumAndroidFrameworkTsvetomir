@@ -19,6 +19,7 @@ import tests.TestPrimer;
  */
 public class Runner {
     //start appium manually from cmd appium
+    //changed to start appium server automatically
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
         //Change Debug Level for the logs
         MyLogger.log.setLevel(Level.INFO);

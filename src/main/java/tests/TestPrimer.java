@@ -8,8 +8,9 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    Navigation.class,
-    Functionality.class
+    //SpeedtestNavigation.class,
+    //SpeedtestFunctionality.class
+      FamyFunctionality.class
 })
 public class TestPrimer {
 }

@@ -1,21 +1,23 @@
 package tests;
 
+
 import api.android.Android;
+import api.apps.famy.Famy;
 import api.apps.speedtest.Speedtest;
 import core.managers.TestManager;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Test Suite To Test Functionality of Speedtest app
+ * Test Suite To Test FamyFunctionality of Famy app
  */
-public class Functionality extends TestManager {
+public class FamyFunctionality extends TestManager{
 
-    private static Speedtest speedtest = Android.app.speedtest;
+    private static Famy famy = Android.app.famy;
 
     @Test
     public void test4TestAgainFunctionality(){
-        testInfo.id("test4TestAgainFunctionality").suite("Functionality").name("Verify that you can test again");
+        testInfo.id("test4TestAgainFunctionality").suite("SpeedtestFunctionality").name("Verify that you can test again");
         speedtest.menu.tapSpeedtest();
         speedtest.home.tapTestAgain();
         Assert.assertTrue(speedtest.home.uiObject.ping().exists());
@@ -29,16 +31,4 @@ public class Functionality extends TestManager {
         Assert.assertTrue(speedtest.home.uiObject.testAgainButton().exists());
         Assert.assertTrue(speedtest.home.uiObject.logo().exists());
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

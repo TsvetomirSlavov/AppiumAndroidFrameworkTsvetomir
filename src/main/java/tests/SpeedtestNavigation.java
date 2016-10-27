@@ -9,9 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Test Suite To Test Navigation through Speedtest app
+ * Test Suite To Test SpeedtestNavigation through Speedtest app
  */
-public class Navigation extends TestManager {
+public class SpeedtestNavigation extends TestManager {
 
     //rationalizing
     private static Speedtest speedtest = Android.app.speedtest;
@@ -23,7 +23,7 @@ public class Navigation extends TestManager {
 
     @Before
     public void before(){
-        testInfo.suite("Navigation");
+        testInfo.suite("SpeedtestNavigation");
     }
 
     @Test

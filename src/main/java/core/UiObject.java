@@ -8,8 +8,12 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
 /**
+ * USe older version of appium in gradle to have scrollTo
  * I HAVE TO IMPLEMENT SCROLLTO METHOD BECAUSE IT IS DEPRECATED
  * Create more methods when needed dependending on the requirements for the app functionality to be validated
+ * //todo implement native appium methods through WebElement that can call all appium methods without this wrapper
+ * WebElement element = Android.driver.   gives me the Appium API
+ * Android.driver.swipe(800,1500,900,600,1);
  */
 public class UiObject {
 

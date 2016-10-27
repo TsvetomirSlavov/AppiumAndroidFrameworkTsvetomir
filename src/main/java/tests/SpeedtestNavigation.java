@@ -3,10 +3,12 @@ package tests;
 import api.android.Android;
 import api.apps.speedtest.Speedtest;
 import core.managers.TestManager;
+import io.appium.java_client.MobileElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 
 /**
  * Test Suite To Test SpeedtestNavigation through Speedtest app
@@ -32,6 +34,7 @@ public class SpeedtestNavigation extends TestManager {
         testInfo.id("test1Home").name("Verify that Home Activity has all the elements");
         speedtest.menu.tapSpeedtest();
         Assert.assertTrue(speedtest.home.uiObject.ping().exists());
+        Android.driver.swipe(800,1500,900,600,1);
         Assert.assertTrue(speedtest.home.uiObject.pingSpeed().exists());
         Assert.assertTrue(speedtest.home.uiObject.download().exists());
         Assert.assertTrue(speedtest.home.uiObject.downloadSpeed().exists());

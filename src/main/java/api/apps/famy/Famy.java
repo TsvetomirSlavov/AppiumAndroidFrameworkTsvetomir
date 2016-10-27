@@ -13,11 +13,7 @@ import api.interfaces.Application;
  */
 public class Famy implements Application{
 
-    public Menu menu = new Menu();
-    public Home home = new Home();
-    public About about = new About();
-    public BeginTest beginTest = new BeginTest();
-    public Results results = new Results();
+
 
 
     public void forceStop() {

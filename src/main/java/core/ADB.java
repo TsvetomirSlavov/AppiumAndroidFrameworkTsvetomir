@@ -3,8 +3,10 @@ package core;
 import core.managers.ServerManager;
 //import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.*;
+
+import static core.managers.ServerManager.getAndroidHome;
 
 /**
  * FIX ADB.EXE CONFLICT - MOBIZEN DELETE ITS ADB.EXE THERE ARE 2 IN ITS FOLDERS!!!!!!!! THIS FIXED IT
@@ -17,6 +19,7 @@ import java.util.Arrays;
 public class ADB {
 
     private String ID;
+    private static String ANDROID_HOME; //added from AnroidAppiumAPI
 
     //constructor
     public ADB(String deviceID) {
@@ -27,7 +30,7 @@ public class ADB {
         //USE LOGGER CLASS FOR ALL METHODS, BUT HOW, SIMPLE, THEY ALL CALL THIS METHOD command()
         MyLogger.log.debug("Formatting ADB Command: "+command);
         if (command.startsWith("adb"))
-            command = command.replace("adb ", ServerManager.getAndroidHome() + "/platform-tools/adb ");
+            command = command.replace("adb ", getAndroidHome() + "/platform-tools/adb ");
         else throw new RuntimeException("This method is designed to run adb commands only");
         MyLogger.log.debug("Formatted ADB Command: "+command);
         String output = ServerManager.runCommand(command);
@@ -211,6 +214,139 @@ public class ADB {
         System.out.println("Processes after stopping new logcat: "+getLogcatProcesses());
     }
     */
+
+
+
+
+    ///////////////ADD MISSING METHODS FROM AppiumAndroidAPI
+    ///////////////////////////////////
+    //////////////////////////////
+    ///////////////////////
+    //////////////
+    ///////
+
+
+
+
+
+    // needed to add Curl - getAndoidHome was already here in Managers
+    // change deviceID variables here to ID
+    // runCommand I have it here as command replace it in the adb methods
+    // Most Methods need to be copied as pairs to work because they call each other
+
+    private static String getAndroidHome(){
+        if(ANDROID_HOME == null) ANDROID_HOME = System.getenv("ANDROID_HOME");
+        if(ANDROID_HOME == null) throw new RuntimeException("Failed to find ANDROID_HOME. Make sure you have ANDROID_HOME set as an environment variable!");
+        return ANDROID_HOME;
+    }
+
+    public static String getAnrFileLocation(String deviceID) {
+        return command("adb -s "+deviceID+" shell getprop dalvik.vm.stack-trace-file");
+    }
+
+    public String getAnrFileLocation() {
+        return getAnrFileLocation(ID);
+    }
+
+    public static LinkedList getDirectoryContent(String target, String deviceID){
+        LinkedList items = new LinkedList();
+        String[] raw = command("-s "+deviceID+" shell ls -a "+target).split("\n");
+        Collections.addAll(items, raw);
+        return items;
+    }
+
+    public LinkedList getDirectoryContent(String target){
+        return getDirectoryContent(target, ID);
+    }
+
+    public int getDevicesWiFiMode() {
+        return getDevicesWiFiMode(ID);
+    }
+
+    public static int getDevicesWiFiMode(String deviceID) {
+        return Integer.parseInt(command("adb -s "+deviceID+" shell settings get global wifi_on"));
+    }
+
+    public static String getDevicesNetworkInterfaceStatus(String deviceID, String interfaceId){
+        return "UP";
+    }
+
+    public String getDevicesNetworkInterfaceStatus(String interfaceId){
+        return getDevicesNetworkInterfaceStatus(ID, interfaceId);
+    }
+
+    public static String getDevicesManufacturer(String deviceID){
+        return command("adb -s "+deviceID+" shell getprop ro.product.manufacturer");
+    }
+
+    public String getDevicesManufacturer(){
+        return getDevicesManufacturer(ID);
+    }
+
+    public static String getDevicesLanguageSettings(String deviceID){
+        return "language settings";
+    }
+
+    public String getDevicesLanguageSettings() {
+        return getDevicesLanguageSettings(ID);
+    }
+
+    public static int getDevicesAirPlaneMode(String deviceID){
+        return 1;
+    }
+
+    public int getDevicesAirPlaneMode(){
+        return getDevicesAirPlaneMode(ID);
+    }
+
+    public static String getAppVersionAsString(String appPackage, String deviceID) {
+        String output = command("adb -s "+deviceID+" shell dumpsys package "+appPackage+" | grep -i versioncode");
+        if(output.contains("versionCode=")) output = output.replace("versionCode=", "");
+        return output;
+    }
+
+    public String getAppVersionAsString(String appPackage) {
+        return getAppVersionAsString(appPackage, ID);
+    }
+
+    public static int getAppVersionAsInt(String appPackage, String deviceID){
+        return Integer.parseInt(getAppVersionAsString(appPackage, deviceID).replaceAll("\\.","").trim());
+    }
+
+    public int getAppVersionAsInt(String appPackage){
+        return getAppVersionAsInt(appPackage, ID);
+    }
+
+    public static String getAppName(String appPackage, String deviceID) {
+        String output = command("adb -s "+deviceID+" shell dumpsys package "+appPackage+" | grep -i versionname");
+        if(output.contains("versionName=")) output = output.replace("versionName=", "");
+        return output;
+    }
+
+    public String getAppName(String appPackage) {
+        return getAppName(appPackage, ID);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

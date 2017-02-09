@@ -1,5 +1,6 @@
 package api.apps;
 
+import api.apps.famy.Famy;
 import api.apps.speedtest.Speedtest;
 
 /**
@@ -9,7 +10,7 @@ import api.apps.speedtest.Speedtest;
 public class Apps {
 
     public Speedtest speedtest = new Speedtest();
-
+    public Famy famy = new Famy();
 
 
 

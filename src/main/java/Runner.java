@@ -18,7 +18,8 @@ import tests.TestPrimer;
  * Created by ceko on 08/27/2016.
  */
 public class Runner {
-    //start appium manually from cmd appium
+    //start appium manually from cmd appium/
+    //changed to start appium server automatically
     public static void main(String[] args) throws MalformedURLException, InterruptedException {
         //Change Debug Level for the logs
         MyLogger.log.setLevel(Level.INFO);

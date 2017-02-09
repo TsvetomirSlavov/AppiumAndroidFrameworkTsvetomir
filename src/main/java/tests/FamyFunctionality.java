@@ -47,5 +47,15 @@ public class FamyFunctionality extends TestManager{
         Assert.assertTrue(driver.findElementByName("ceko").isDisplayed());
         driver.swipe(800,1500,900,600,1);
         Assert.assertFalse(driver.findElementByName("ceko").isDisplayed());
+        // New static functionalities in android.Android swipes accept 1 to 20 values - vertivally splitted display in 20 parts
+        Android.swipeLeft(5);
+        Android.swipeRight(3);
+        Android.pressBack();
+        Android.pressHome();
+        Android.scrollDown();
+        Android.scrollUp();
+        Android.scrollDown(5);
+        Android.scrollUp(7);
+
     }
 }

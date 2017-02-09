@@ -289,5 +289,51 @@ public class UiObject {
 
 
 
+    // Added from AndoidAppiumAPI
+    // Change uiLocator variable to locator which I have here in the constructor
+
+
+    public Point getBounds(){
+        WebElement element;
+        if(xPath()) element = Android.driver.findElementByXPath(locator);
+        else element = Android.driver.findElementByAndroidUIAutomator(locator);
+        return element.getLocation();//getAttribute("bounds");
+    }
+
+    private boolean xPath(){
+        boolean value = !locator.contains("UiSelector");
+        System.out.println("Element is xPath: "+value);
+        return value;
+    }
+
+
+
+    public UiObject scrollToText(){
+        if(xPath()) throw new RuntimeException("Cannot scroll to an xPath! Java Client does not support this");
+        else if(!locator.contains("")) throw new RuntimeException("UiSelector: "+locator+" does not have a text attribute! Try to use scrollToElement() instead.");
+        else {
+            String text;
+            if(locator.contains("textContains")) text = locator.substring(locator.indexOf(".textContains(\""), locator.indexOf("\")")).replace(".textContains(\"","");
+            else text = locator.substring(locator.indexOf(".text(\""), locator.indexOf("\")")).replace(".text(\"","");
+            Android.driver.scrollToExact(text);
+        }
+        return this;
+    }
+
+    public UiObject setText(String value){
+        WebElement element;
+        if(xPath()) element = Android.driver.findElementByXPath(locator);
+        else element = Android.driver.findElementByAndroidUIAutomator(locator);
+        String existingText = element.getText();
+        if(!existingText.equals(value)) clearText();
+        else if(existingText != null && !existingText.isEmpty()) clearText();
+        element.sendKeys(value);
+        return this;
+    }
+
+
+
+
+
 
 }

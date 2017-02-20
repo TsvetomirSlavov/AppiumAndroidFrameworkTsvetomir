@@ -1,5 +1,16 @@
 Tsvetomir Slavov Android Appium Automation Framework 
 
+DESCRIPTION
+develop further depending on your requirements
+JUnit Rules, Retry, and Parametarized test runs
+wrappers for Appium, and ADB (Android debug bridge)
+DriverMager that automatically troubleshoots any issues with our Appium Servers and starts Appium servers automatically
+ADB integration for quicker run times
+
+Issues with Gradle it is not working and not dowloading the dependencies.
+testCompile was added in 1.1.0 and this Gradle is older
+FIX - Build > Maven > Repositories > Update; comment out the build in Gradle
+
 HOW TO USE THE FRAMEWORK
 
 1 Add AUT, add Page Objects and models/actions
@@ -13,7 +24,23 @@ public void forceStop() {
     }
 6 Add more custom methods in Android to simplify the Appium library if needed or just use the Appium Library
 
+TO ADD
 
+Add more custom methods in Android to simplify the Appium library if needed or just use the Appium Library
+Takes logcat output when tests fail
+Takes screenshots from the device when tests fail
+Takes stacktrace from the Java code when tests fail
+Takes TCP Dump from the access point when tests fail
+Freed up EggPlant licences for other teams/projects
+Build with open source tools so zero fees and no subscriptions
+Supports running tests on more than one physical device in parallel
+Supports cellular network tests
+Easy test creation from existing classes and methods
+Has stress testing suites
+Has unittests to check compatibility of a device with the framework
+and more
+Create automation test cases & test suites for UI/UX, server, ads, purchasing, and compatibility testing Famy
+package tests;
 
 
 
